@@ -1,0 +1,1767 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- CUSTOMIZE: Judul tab browser -->
+  <title>Happy Birthday, Sayang 💙</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ========================================
+       ROOT VARIABLES — BIRU MUDA TERANG + PUTIH + GOLD PREMIUM
+    ======================================== */
+    :root {
+      --bg:           #b8e0f7;          /* Biru muda utama */
+      --bg2:          #d6eeff;          /* Biru muda lebih terang */
+      --bg3:          #e8f6ff;          /* Biru sangat muda */
+      --primary:      #5baee0;          /* Biru medium */
+      --blue:         #2b8ccf;          /* Biru utama */
+      --blue-light:   #5baee0;          /* Biru muda aksen */
+      --blue-soft:    #1a6fa8;          /* Biru tua untuk teks */
+      --white:        #ffffff;
+      --soft-white:   #f7fcff;          /* Putih kebiruan */
+      --ice:          #dff4ff;          /* Ice blue */
+      /* Gold premium */
+      --gold:         #d4a017;          /* Gold utama */
+      --gold-light:   #f0c842;          /* Gold terang */
+      --gold-shine:   #ffe680;          /* Gold bersinar */
+      --gold-dark:    #a07010;          /* Gold gelap */
+      --text:         #ffffff;
+      --text-dark:    #0d3a5c;          /* Teks gelap untuk bg terang */
+      --muted:        #5b8daa;
+      --glass-bg:     rgba(255,255,255,0.35);
+      --glass-border: rgba(212,160,23,0.4);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: linear-gradient(160deg, #aad8f5 0%, #c8e9ff 30%, #d6f0ff 55%, #b8d9f0 80%, #9ec8e8 100%);
+      background-attachment: fixed;
+      color: var(--text-dark);
+      font-family: 'Lato', sans-serif;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* ========================================
+       UTILITY
+    ======================================== */
+    .section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .glass-card {
+      background: rgba(255,255,255,0.45);
+      border: 1px solid rgba(212,160,23,0.35);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(43,140,207,0.15);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      text-align: center;
+      background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 40%, var(--gold-shine) 65%, var(--gold) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      position: relative;
+      display: inline-block;
+      filter: drop-shadow(0 2px 8px rgba(212,160,23,0.4));
+    }
+
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), transparent);
+      margin: 12px auto 0;
+      box-shadow: 0 0 8px rgba(212,160,23,0.5);
+    }
+
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-in-up.visible { opacity: 1; transform: translateY(0); }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.3s; }
+    .delay-4 { transition-delay: 0.4s; }
+    .delay-5 { transition-delay: 0.5s; }
+    .delay-6 { transition-delay: 0.6s; }
+
+    /* ========================================
+       GLOBAL AMBIENT PARTICLES CANVAS
+    ======================================== */
+    #global-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ========================================
+       SECTION 1 — HERO
+    ======================================== */
+    #hero {
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 20% 20%, rgba(212,160,23,0.15) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 80%, rgba(240,200,66,0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 0%,  rgba(255,255,255,0.3) 0%, transparent 60%),
+        linear-gradient(160deg, #aad8f5 0%, #c8e9ff 40%, #b5d8ef 100%);
+      text-align: center;
+    }
+
+    .hero-ornament {
+      font-size: 1.1rem;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+      font-family: 'Lato', sans-serif;
+      font-weight: 300;
+      opacity: 0;
+      animation: fadeSlideDown 1s ease 0.5s forwards;
+      text-shadow: 0 2px 8px rgba(212,160,23,0.5);
+    }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #ffffff 0%, var(--gold-shine) 35%, var(--gold-light) 55%, #ffffff 80%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      min-height: 1.2em;
+      animation: shimmerGold 4s ease infinite;
+      filter: drop-shadow(0 4px 16px rgba(212,160,23,0.4));
+    }
+
+    @keyframes shimmerGold {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .hero-title .cursor {
+      display: inline-block;
+      width: 3px;
+      height: 0.9em;
+      background: var(--gold);
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blink 0.8s step-end infinite;
+      -webkit-text-fill-color: var(--gold);
+    }
+
+    .hero-sub {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      color: var(--blue-soft);
+      margin-top: 20px;
+      opacity: 0;
+      animation: fadeSlideDown 1s ease 2.5s forwards;
+    }
+
+    .hero-scroll-hint {
+      margin-top: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeSlideDown 1s ease 3.5s forwards;
+    }
+
+    .hero-scroll-hint span {
+      font-size: 0.75rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--blue-soft);
+    }
+
+    .scroll-arrow {
+      width: 24px;
+      height: 24px;
+      border-right: 2px solid var(--gold);
+      border-bottom: 2px solid var(--gold);
+      transform: rotate(45deg);
+      animation: bounce 1.5s ease infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: rotate(45deg) translateY(0); }
+      50%       { transform: rotate(45deg) translateY(6px); }
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ========================================
+       SECTION 2 — PASSWORD GATE
+    ======================================== */
+    #password-gate {
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(255,220,80,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 20%, rgba(212,160,23,0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #c0e5f8 0%, #d8f0ff 50%, #c8e9ff 100%);
+    }
+
+    .gate-heading {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2rem, 5vw, 3rem);
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-shine));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-align: center;
+      margin-bottom: 10px;
+      filter: drop-shadow(0 2px 6px rgba(212,160,23,0.4));
+    }
+
+    .gate-sub {
+      font-size: 1rem;
+      color: var(--blue-soft);
+      text-align: center;
+      margin-bottom: 48px;
+      letter-spacing: 1px;
+    }
+
+    .password-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .password-grid .pw-btn:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      max-width: 240px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .pw-btn {
+      background: rgba(255,255,255,0.5);
+      border: 1px solid rgba(212,160,23,0.35);
+      backdrop-filter: blur(16px);
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--blue-soft);
+      letter-spacing: 4px;
+      user-select: none;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(43,140,207,0.1);
+    }
+
+    .pw-btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(212,160,23,0.15) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .pw-btn:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(212,160,23,0.3);
+    }
+    .pw-btn:hover::before { opacity: 1; }
+
+    .pw-btn .btn-label {
+      font-size: 0.65rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-top: 4px;
+      font-family: 'Lato', sans-serif;
+    }
+
+    .pw-btn.wrong {
+      border-color: #e05070 !important;
+      animation: shake 0.5s ease;
+    }
+
+    .pw-btn.correct {
+      border-color: var(--gold) !important;
+      background: rgba(212,160,23,0.18) !important;
+      box-shadow: 0 0 40px rgba(212,160,23,0.5) !important;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%  { transform: translateX(-10px); }
+      40%  { transform: translateX(10px); }
+      60%  { transform: translateX(-6px); }
+      80%  { transform: translateX(6px); }
+    }
+
+    .gate-feedback {
+      margin-top: 24px;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: var(--gold-dark);
+      text-align: center;
+      min-height: 2em;
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+    .gate-feedback.show { opacity: 1; }
+
+    /* ========================================
+       SECTION 3 — BALLOON BURST
+    ======================================== */
+    #balloon-burst {
+      z-index: 1;
+      background: linear-gradient(160deg, #aad8f5 0%, #c8e9ff 50%, #b8d9f0 100%);
+      text-align: center;
+      display: none;
+    }
+
+    #balloon-burst.show { display: flex; }
+
+    #balloon-canvas {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    .burst-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+    .burst-content.show { opacity: 1; }
+
+    .age-number {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 20vw, 12rem);
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 30%, var(--gold-shine) 55%, var(--gold-light) 75%, var(--gold-dark) 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmerGoldNum 3s ease infinite;
+      line-height: 1;
+      filter: drop-shadow(0 4px 20px rgba(212,160,23,0.5));
+    }
+
+    @keyframes shimmerGoldNum {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .photo-frame {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      border: 4px solid var(--gold);
+      box-shadow: 0 0 0 4px rgba(212,160,23,0.2), 0 0 0 8px rgba(212,160,23,0.08), 0 0 40px rgba(212,160,23,0.4);
+      overflow: hidden;
+      background: rgba(255,255,255,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    .photo-placeholder { text-align: center; padding: 16px; }
+    .photo-placeholder .ph-icon { font-size: 2.5rem; display: block; margin-bottom: 8px; }
+    .photo-placeholder p { font-size: 0.75rem; color: var(--muted); line-height: 1.4; }
+
+    .burst-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      color: var(--blue-soft);
+      text-align: center;
+      text-shadow: 0 2px 8px rgba(26,111,168,0.3);
+    }
+
+    .burst-emoji {
+      font-size: 2rem;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+
+    /* ========================================
+       SECTION 4 — SPECIAL MESSAGE
+    ======================================== */
+    #special-message {
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 70% 30%, rgba(255,220,80,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #c8e9ff 0%, #d8f0ff 50%, #c0e3f5 100%);
+    }
+
+    .msg-ornament {
+      text-align: center;
+      color: var(--gold);
+      font-size: 1.5rem;
+      letter-spacing: 8px;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 8px rgba(212,160,23,0.5);
+    }
+
+    .msg-body {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      line-height: 2.2;
+      color: var(--blue-soft);
+      text-align: center;
+      max-width: 720px;
+    }
+
+    .msg-body::before,
+    .msg-body::after {
+      content: '';
+      display: block;
+      width: 80%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), transparent);
+      margin: 24px auto;
+      box-shadow: 0 0 6px rgba(212,160,23,0.4);
+    }
+
+    .msg-word { display: inline; opacity: 0; transition: opacity 0.3s ease; }
+    .msg-word.visible { opacity: 1; }
+
+    /* ========================================
+       SECTION 5 — OUR MEMORIES
+    ======================================== */
+    #our-memories {
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 50% 100%, rgba(255,220,80,0.1) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 20%, rgba(43,140,207,0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #d4edfa 0%, #e0f4ff 50%, #cce7f7 100%);
+    }
+
+    .memories-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: var(--blue-soft);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .polaroid-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .polaroid {
+      background: rgba(255,255,255,0.9);
+      padding: 12px 12px 40px;
+      box-shadow: 0 10px 32px rgba(43,140,207,0.2), 0 2px 8px rgba(212,160,23,0.15);
+      border: 1px solid rgba(212,160,23,0.2);
+      border-radius: 4px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: default;
+    }
+
+    .polaroid:nth-child(odd)  { transform: rotate(-2.5deg); }
+    .polaroid:nth-child(even) { transform: rotate(2deg); }
+    .polaroid:nth-child(3n)   { transform: rotate(-1deg); }
+
+    .polaroid:hover {
+      transform: rotate(0) scale(1.06) !important;
+      box-shadow: 0 20px 60px rgba(212,160,23,0.35), 0 8px 24px rgba(43,140,207,0.2);
+      z-index: 10;
+    }
+
+    .polaroid-img {
+      width: 100%;
+      aspect-ratio: 1;
+      background: linear-gradient(135deg, #c8e9ff, #d8f0ff, #b8d9f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .polaroid-img img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .polaroid-img .ph-icon-pol { font-size: 2rem; color: var(--blue); }
+    .polaroid-img .ph-txt { font-size: 0.65rem; color: var(--blue-soft); text-align: center; padding: 0 8px; }
+
+    .polaroid-caption {
+      text-align: center;
+      font-family: 'Dancing Script', cursive;
+      font-size: 0.95rem;
+      color: var(--blue-soft);
+      margin-top: 10px;
+      line-height: 1.4;
+    }
+
+    /* ========================================
+       SECTION 6 — REASONS
+    ======================================== */
+    #reasons {
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(212,160,23,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 20%, rgba(43,140,207,0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #c8e9ff 0%, #d6eeff 50%, #c0e3f5 100%);
+    }
+
+    .reasons-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: var(--blue-soft);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .hearts-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      bottom: -50px;
+      animation: floatHeart linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatHeart {
+      0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+      10%  { opacity: 0.5; }
+      90%  { opacity: 0.2; }
+      100% { opacity: 0; transform: translateY(-110vh) rotate(360deg); }
+    }
+
+    .flip-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      max-width: 900px;
+      width: 100%;
+    }
+
+    .flip-card { height: 180px; perspective: 1000px; cursor: pointer; }
+
+    .flip-inner {
+      position: relative;
+      width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .flip-card:hover .flip-inner,
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .flip-front {
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(212,160,23,0.3);
+      backdrop-filter: blur(16px);
+      box-shadow: 0 4px 16px rgba(43,140,207,0.1);
+    }
+
+    .flip-card:nth-child(even) .flip-front {
+      background: rgba(240,248,255,0.6);
+      border-color: rgba(43,140,207,0.25);
+    }
+
+    .flip-front .flip-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-shine));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 2px 4px rgba(212,160,23,0.3));
+    }
+
+    .flip-card:nth-child(even) .flip-front .flip-num {
+      background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    .flip-front .flip-icon { font-size: 1.3rem; }
+    .flip-front .flip-hint { font-size: 0.65rem; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; }
+
+    .flip-back {
+      background: linear-gradient(135deg, #1a5a8a, #2b8ccf);
+      border: 1px solid rgba(212,160,23,0.5);
+      transform: rotateY(180deg);
+      box-shadow: inset 0 0 30px rgba(255,255,255,0.05);
+    }
+
+    .flip-back p {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.05rem;
+      color: #ffffff;
+      line-height: 1.6;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    /* ========================================
+       SECTION 7 — MAKE A WISH
+    ======================================== */
+    #make-wish {
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(255,220,80,0.12) 0%, transparent 60%),
+        radial-gradient(ellipse at 30% 70%, rgba(43,140,207,0.08) 0%, transparent 50%),
+        linear-gradient(160deg, #c0e5f8 0%, #d4eeff 50%, #c8e9ff 100%);
+    }
+
+    .wish-subtitle {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      color: var(--blue-soft);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .cake-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+    }
+
+    .candles-row {
+      display: flex;
+      gap: 6px;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 400px;
+      margin-bottom: 0;
+    }
+
+    .candle { display: flex; flex-direction: column; align-items: center; }
+
+    .flame {
+      width: 10px;
+      height: 16px;
+      background: radial-gradient(ellipse at center, #fff9e0 0%, var(--gold-shine) 30%, var(--gold-light) 70%, transparent 100%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: flicker 0.3s ease-in-out infinite alternate;
+    }
+
+    @keyframes flicker {
+      0%   { transform: scaleX(1) scaleY(1); opacity: 1; }
+      100% { transform: scaleX(0.85) scaleY(1.1); opacity: 0.9; }
+    }
+
+    .flame.out { background: none; animation: none; }
+    .flame.out::after {
+      content: '';
+      display: block;
+      width: 2px;
+      height: 8px;
+      background: rgba(180,220,255,0.5);
+      margin: 0 auto;
+      border-radius: 2px;
+      animation: smokeRise 1s ease forwards;
+    }
+
+    @keyframes smokeRise {
+      0%   { opacity: 0.6; transform: translateY(0) scaleX(1); }
+      100% { opacity: 0;   transform: translateY(-16px) scaleX(2); }
+    }
+
+    .candle-stick { width: 10px; height: 32px; border-radius: 3px 3px 0 0; }
+
+    .cake-body { display: flex; flex-direction: column; align-items: center; }
+
+    .cake-tier {
+      border-radius: 8px 8px 0 0;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .tier-top {
+      width: 300px;
+      height: 70px;
+      background: linear-gradient(135deg, var(--gold-shine) 0%, #fff8dc 50%, var(--gold-shine) 100%);
+      border-radius: 12px 12px 0 0;
+      box-shadow: 0 -2px 12px rgba(212,160,23,0.3);
+    }
+
+    .tier-middle {
+      width: 340px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+      margin-top: -2px;
+      box-shadow: 0 4px 16px rgba(212,160,23,0.4);
+    }
+
+    .tier-bottom {
+      width: 380px;
+      height: 90px;
+      background: linear-gradient(135deg, #1a5a8a 0%, #2b8ccf 50%, #1a5a8a 100%);
+      border-radius: 0 0 16px 16px;
+      margin-top: -2px;
+      box-shadow: 0 8px 20px rgba(43,140,207,0.3);
+    }
+
+    .tier-deco {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 12px;
+      background: repeating-linear-gradient(90deg, rgba(255,255,255,0.2) 0px, rgba(255,255,255,0.2) 8px, transparent 8px, transparent 16px);
+    }
+
+    .tier-text {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.3rem;
+      position: absolute;
+      white-space: nowrap;
+    }
+
+    .blow-btn {
+      margin-top: 36px;
+      padding: 16px 48px;
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-shine), var(--gold));
+      background-size: 200% 200%;
+      border: none;
+      border-radius: 50px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: #fff;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(212,160,23,0.5), inset 0 1px 0 rgba(255,255,255,0.3);
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+      animation: shimmerGold 3s ease infinite;
+    }
+
+    .blow-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 40px rgba(212,160,23,0.7);
+    }
+
+    .blow-btn:disabled { opacity: 0.5; cursor: default; transform: none; }
+
+    .wish-message {
+      margin-top: 36px;
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--blue-soft);
+      text-align: center;
+      max-width: 600px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
+    }
+    .wish-message.show { opacity: 1; transform: translateY(0); }
+
+    /* ========================================
+       SECTION 8 — FINAL / OUTRO
+    ======================================== */
+    #final {
+      z-index: 1;
+      background:
+        radial-gradient(ellipse at 50% 50%, rgba(255,220,80,0.15) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(43,140,207,0.1) 0%, transparent 50%),
+        linear-gradient(160deg, #c0e5f8 0%, #d8f0ff 50%, #b8d9f0 100%);
+      text-align: center;
+    }
+
+    .star-field { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+
+    .star-dot {
+      position: absolute;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: twinkle linear infinite;
+      box-shadow: 0 0 4px rgba(212,160,23,0.6);
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.1; }
+      50%       { opacity: 1; }
+    }
+
+    .shooting-star {
+      position: absolute;
+      width: 2px;
+      height: 60px;
+      background: linear-gradient(to bottom, rgba(212,160,23,0), rgba(255,220,80,0.95));
+      border-radius: 1px;
+      animation: shoot linear infinite;
+    }
+
+    @keyframes shoot {
+      0%   { transform: translateX(0) translateY(0) rotate(30deg); opacity: 0; }
+      5%   { opacity: 1; }
+      100% { transform: translateX(600px) translateY(400px) rotate(30deg); opacity: 0; }
+    }
+
+    .final-quote {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      color: var(--blue-soft);
+      max-width: 700px;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+
+    .final-quote::before { content: '\201C'; color: var(--gold); font-size: 1.5em; vertical-align: -0.3em; text-shadow: 0 2px 8px rgba(212,160,23,0.5); }
+    .final-quote::after  { content: '\201D'; color: var(--gold); font-size: 1.5em; vertical-align: -0.3em; text-shadow: 0 2px 8px rgba(212,160,23,0.5); }
+
+    .final-sig {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      color: var(--muted);
+      letter-spacing: 2px;
+      margin-bottom: 48px;
+    }
+
+    .final-sig span {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-shine));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-style: italic;
+    }
+
+    .replay-btn {
+      padding: 14px 40px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      border-radius: 50px;
+      color: var(--gold-dark);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .replay-btn:hover {
+      background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+      color: #fff;
+      box-shadow: 0 8px 32px rgba(212,160,23,0.5);
+      border-color: transparent;
+    }
+
+    .final-hearts {
+      font-size: 1.5rem;
+      margin-top: 32px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    /* ========================================
+       CONFETTI CANVAS
+    ======================================== */
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Separator line */
+    .sep {
+      width: 100%;
+      max-width: 400px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold-light), transparent);
+      margin: 0 auto 48px;
+      box-shadow: 0 0 8px rgba(212,160,23,0.4);
+    }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+    @media (max-width: 600px) {
+      .password-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .polaroid-grid  { grid-template-columns: 1fr 1fr; }
+      .flip-grid      { grid-template-columns: 1fr 1fr; }
+      .tier-top    { width: 220px; }
+      .tier-middle { width: 260px; }
+      .tier-bottom { width: 300px; }
+      .candles-row { max-width: 300px; }
+      .photo-frame { width: 160px; height: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="global-canvas"></canvas>
+<canvas id="confetti-canvas"></canvas>
+
+<!-- ============================================================
+     SECTION 1 — HERO
+============================================================ -->
+<section id="hero" class="section">
+  <!-- CUSTOMIZE: Teks ornamen atas -->
+  <div class="hero-ornament">✦ &nbsp; a surprise for you &nbsp; ✦</div>
+
+  <!-- CUSTOMIZE: Teks typewriter di hero-title diatur di JS -->
+  <h1 class="hero-title" id="hero-title"><span class="cursor"></span></h1>
+
+  <!-- CUSTOMIZE: Subtitle romantis -->
+  <p class="hero-sub">"Hari ini adalah hari yang paling aku tunggu-tunggu untukmu..."</p>
+
+  <div class="hero-scroll-hint">
+    <span>scroll</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2 — PASSWORD GATE
+============================================================ -->
+<section id="password-gate" class="section">
+  <!-- CUSTOMIZE: Kalimat tanya -->
+  <h2 class="gate-heading fade-in-up">Hanya untukmu... jawab dulu ya 💙</h2>
+  <p class="gate-sub fade-in-up delay-1">Pilih tanggal yang paling kamu ingat</p>
+
+  <div class="password-grid">
+    <!-- CUSTOMIZE: Tampilan tanggal — data-code jawaban benar = 240326 -->
+    <button class="pw-btn fade-in-up delay-1" data-code="071224">
+      07 · 12 · 24 <span class="btn-label">Desember 2024</span>
+    </button>
+    <button class="pw-btn fade-in-up delay-2" data-code="240326">
+      24 · 03 · 26 <span class="btn-label">Maret 2026</span>
+    </button>
+    <button class="pw-btn fade-in-up delay-3" data-code="150825">
+      15 · 08 · 25 <span class="btn-label">Agustus 2025</span>
+    </button>
+    <button class="pw-btn fade-in-up delay-4" data-code="311001">
+      31 · 10 · 01 <span class="btn-label">Oktober 2001</span>
+    </button>
+    <button class="pw-btn fade-in-up delay-5" data-code="190699">
+      19 · 06 · 99 <span class="btn-label">Juni 1999</span>
+    </button>
+  </div>
+
+  <div class="gate-feedback" id="gate-feedback">Hmm, coba ingat lagi... 😊</div>
+</section>
+
+<!-- ============================================================
+     SECTION 3 — BALLOON BURST
+============================================================ -->
+<section id="balloon-burst" class="section">
+  <canvas id="balloon-canvas"></canvas>
+
+  <div class="burst-content" id="burst-content">
+    <div class="age-number">25</div>
+
+    <div class="photo-frame" id="photo-frame">
+      <!-- CUSTOMIZE: Uncomment dan isi src foto nyata -->
+      <!-- <img src="foto.jpg" alt="Foto Sayang" /> -->
+      <div class="photo-placeholder">
+        <span class="ph-icon">📸</span>
+        <!-- CUSTOMIZE: Ganti dengan <img src="foto.jpg"> -->
+        <p>Taruh foto<br>kamu di sini</p>
+      </div>
+    </div>
+
+    <!-- CUSTOMIZE: Nama di teks setelah balon meletus -->
+    <p class="burst-title">Happy 25th Birthday, Sayang! 🎂</p>
+    <div class="burst-emoji">🎉</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 4 — SPECIAL MESSAGE
+============================================================ -->
+<section id="special-message" class="section">
+  <div style="text-align:center; max-width:760px; width:100%;">
+    <div class="msg-ornament fade-in-up">— ✦ —</div>
+    <h2 class="section-title fade-in-up delay-1">A Special Message 💌</h2>
+    <div class="sep fade-in-up delay-2"></div>
+
+    <div class="msg-body fade-in-up delay-3" id="msg-body">
+      <!--
+        CUSTOMIZE: Ganti teks pesan di bawah dengan pesan aslimu.
+      -->
+      Hei kamu yang selalu bikin hari-hariku lebih berwarna. Di hari yang sangat spesial ini,
+      aku ingin kamu tahu betapa berharganya kamu bagiku.
+      Kamu adalah seseorang yang hadir dan mengubah segalanya dengan caramu yang sederhana namun luar biasa.
+      Terima kasih sudah ada, sudah berjuang, sudah menjadi dirimu sendiri.
+      Hari ini bukan hanya ulang tahunmu — ini adalah perayaan dari semua hal indah yang kamu bawa ke dalam hidupku.
+      Semoga 25 tahun ini menjadi awal dari babak paling luar biasa dalam hidupmu.
+      Aku bangga denganmu. Aku menyayangimu. Selalu. 💙
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5 — OUR MEMORIES
+============================================================ -->
+<section id="our-memories" class="section">
+  <h2 class="section-title fade-in-up">Our Memories 📸</h2>
+  <p class="memories-subtitle fade-in-up delay-1">Setiap momen bersamamu selalu terasa sempurna...</p>
+
+  <div class="polaroid-grid">
+    <!--
+      CUSTOMIZE: Uncomment <img src="memory1.jpg"> dan ganti caption
+    -->
+    <div class="polaroid fade-in-up delay-1">
+      <div class="polaroid-img">
+        <!-- <img src="memory1.jpg" alt="Memory 1" /> -->
+        <span class="ph-icon-pol">📷</span>
+        <span class="ph-txt">Foto kenangan 1</span>
+      </div>
+      <p class="polaroid-caption">"Momen pertama kita..."</p>
+    </div>
+
+    <div class="polaroid fade-in-up delay-2">
+      <div class="polaroid-img">
+        <!-- <img src="memory2.jpg" alt="Memory 2" /> -->
+        <span class="ph-icon-pol">📷</span>
+        <span class="ph-txt">Foto kenangan 2</span>
+      </div>
+      <p class="polaroid-caption">"Waktu kita tertawa bersama"</p>
+    </div>
+
+    <div class="polaroid fade-in-up delay-3">
+      <div class="polaroid-img">
+        <!-- <img src="memory3.jpg" alt="Memory 3" /> -->
+        <span class="ph-icon-pol">📷</span>
+        <span class="ph-txt">Foto kenangan 3</span>
+      </div>
+      <p class="polaroid-caption">"Petualangan kita berdua"</p>
+    </div>
+
+    <div class="polaroid fade-in-up delay-4">
+      <div class="polaroid-img">
+        <!-- <img src="memory4.jpg" alt="Memory 4" /> -->
+        <span class="ph-icon-pol">📷</span>
+        <span class="ph-txt">Foto kenangan 4</span>
+      </div>
+      <p class="polaroid-caption">"Senyummu yang selalu kuingat"</p>
+    </div>
+
+    <div class="polaroid fade-in-up delay-5">
+      <div class="polaroid-img">
+        <!-- <img src="memory5.jpg" alt="Memory 5" /> -->
+        <span class="ph-icon-pol">📷</span>
+        <span class="ph-txt">Foto kenangan 5</span>
+      </div>
+      <p class="polaroid-caption">"Momen yang tak terlupakan"</p>
+    </div>
+
+    <div class="polaroid fade-in-up delay-6">
+      <div class="polaroid-img">
+        <!-- <img src="memory6.jpg" alt="Memory 6" /> -->
+        <span class="ph-icon-pol">📷</span>
+        <span class="ph-txt">Foto kenangan 6</span>
+      </div>
+      <p class="polaroid-caption">"Bersamamu terasa sempurna"</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 6 — REASONS I LOVE YOU
+============================================================ -->
+<section id="reasons" class="section">
+  <div class="hearts-bg" id="hearts-bg"></div>
+
+  <h2 class="section-title fade-in-up" style="position:relative;z-index:2;">Reasons Why I Love You 💙</h2>
+  <p class="reasons-subtitle fade-in-up delay-1" style="position:relative;z-index:2;">Klik kartu untuk membaca alasannya ✨</p>
+
+  <div class="flip-grid" style="position:relative;z-index:2;">
+    <!--
+      CUSTOMIZE: Ganti teks "Karena..." di setiap flip-back
+    -->
+    <div class="flip-card fade-in-up delay-1">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">01</span><span class="flip-icon">💙</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena senyummu bisa mengubah hari terburukku jadi yang terbaik</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-2">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">02</span><span class="flip-icon">🌟</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena kamu selalu ada di saat yang paling aku butuhkan</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-3">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">03</span><span class="flip-icon">✨</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena cara kamu tertawa membuatku jatuh cinta setiap hari</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-4">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">04</span><span class="flip-icon">🔥</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena semangatmu menginspirasi aku untuk terus jadi lebih baik</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-5">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">05</span><span class="flip-icon">🌸</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena kamu menerima aku apa adanya, termasuk kekuranganku</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-6">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">06</span><span class="flip-icon">💫</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena mata kamu selalu berbicara lebih banyak dari kata-kata</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-1">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">07</span><span class="flip-icon">🎵</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena suara kamu adalah lagu favorit yang ingin terus kudengar</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-2">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">08</span><span class="flip-icon">🌙</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena kamu membuat malam-malamku terasa lebih indah dan bermakna</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-3">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">09</span><span class="flip-icon">🏆</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena kamu berjuang keras untuk mimpi-mimpimu dan itu membuatku bangga</p></div>
+      </div>
+    </div>
+
+    <div class="flip-card fade-in-up delay-4">
+      <div class="flip-inner">
+        <div class="flip-front"><span class="flip-num">10</span><span class="flip-icon">♾️</span><span class="flip-hint">tap to read</span></div>
+        <div class="flip-back"><p>Karena kamu adalah alasan terbaik aku bersyukur setiap harinya</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 7 — MAKE A WISH
+============================================================ -->
+<section id="make-wish" class="section">
+  <h2 class="section-title fade-in-up">Make a Wish 🕯️</h2>
+  <!-- CUSTOMIZE: Subtitle -->
+  <p class="wish-subtitle fade-in-up delay-1">"Tutup mata, buat permohonan, lalu tiup lilinnya..."</p>
+
+  <div class="cake-container fade-in-up delay-2">
+    <div class="candles-row" id="candles-row"></div>
+
+    <div class="cake-body">
+      <div class="cake-tier tier-top">
+        <div class="tier-deco"></div>
+        <!-- CUSTOMIZE: Teks tier atas kue -->
+        <span class="tier-text" style="color:rgba(3,29,58,0.85);font-size:1rem;">Happy Birthday</span>
+      </div>
+      <div class="cake-tier tier-middle">
+        <div class="tier-deco"></div>
+        <!-- CUSTOMIZE: Teks tier tengah -->
+        <span class="tier-text" style="color:#fff;">Sayang 💙</span>
+      </div>
+      <div class="cake-tier tier-bottom">
+        <div class="tier-deco"></div>
+        <span class="tier-text" style="font-size:2rem;color:var(--blue-light);">25</span>
+      </div>
+    </div>
+
+    <button class="blow-btn" id="blow-btn">Tiup Lilinnya 🌬️</button>
+
+    <!-- CUSTOMIZE: Pesan setelah lilin padam -->
+    <p class="wish-message" id="wish-message">
+      Semoga semua keinginanmu terkabul, Sayang...<br>
+      Langit pun ikut merayakan hari spesialmu ✨💙
+    </p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 8 — FINAL / OUTRO
+============================================================ -->
+<section id="final" class="section">
+  <div class="star-field" id="star-field"></div>
+
+  <!-- CUSTOMIZE: Quote penutup -->
+  <p class="final-quote fade-in-up">
+    Kamu adalah alasan terbaik aku tersenyum setiap hari, dan aku tidak bisa membayangkan menjalani hari tanpa kamu di dalamnya.
+  </p>
+
+  <!-- CUSTOMIZE: Nama kamu (pengirim) -->
+  <p class="final-sig fade-in-up delay-1">
+    Dengan segenap cinta &amp; hati, &nbsp;<span>[Nama Kamu]</span> &nbsp;·&nbsp; 24.03.2026 💙
+  </p>
+
+  <button class="replay-btn fade-in-up delay-2" onclick="replayFromStart()">🔁 Mulai dari Awal</button>
+
+  <div class="final-hearts fade-in-up delay-3">💙 &nbsp; ✨ &nbsp; 💙</div>
+</section>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ========================================
+   CONFIG
+======================================== */
+const CORRECT_PASSWORD = '240326';
+
+/* ========================================
+   GLOBAL AMBIENT PARTICLES — BIRU
+======================================== */
+(function initGlobalParticles() {
+  const canvas = document.getElementById('global-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+
+  // Biru muda & gold untuk partikel
+  const pColors = [
+    'rgba(43,140,207,',   // biru
+    'rgba(91,174,224,',   // biru muda
+    'rgba(212,160,23,',   // gold
+    'rgba(240,200,66,',   // gold terang
+    'rgba(255,230,128,',  // gold shine
+    'rgba(255,255,255,',  // putih
+  ];
+
+  function createParticle() {
+    return {
+      x: Math.random() * W,
+      y: Math.random() * H,
+      r: Math.random() * 1.8 + 0.3,
+      vx: (Math.random() - 0.5) * 0.2,
+      vy: -Math.random() * 0.5 - 0.1,
+      alpha: Math.random() * 0.6 + 0.1,
+      life: Math.random() * 200 + 100,
+      maxLife: 0,
+      color: pColors[Math.floor(Math.random() * pColors.length)]
+    };
+  }
+
+  function init() {
+    resize();
+    for (let i = 0; i < 140; i++) {
+      const p = createParticle();
+      p.life    = Math.random() * p.life;
+      p.maxLife = p.life;
+      particles.push(p);
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach((p, i) => {
+      p.x    += p.vx;
+      p.y    += p.vy;
+      p.life--;
+      const prog  = p.life / p.maxLife;
+      const alpha = p.alpha * Math.sin(prog * Math.PI);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color + alpha + ')';
+      ctx.fill();
+      if (p.life <= 0) {
+        particles[i]         = createParticle();
+        particles[i].maxLife = particles[i].life;
+        particles[i].y       = H + 10;
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  init();
+  draw();
+})();
+
+/* ========================================
+   HERO TYPEWRITER
+======================================== */
+(function heroTypewriter() {
+  // CUSTOMIZE: Teks hero
+  const text   = 'Happy Birthday, Sayang! 🎂';
+  const title  = document.getElementById('hero-title');
+  const cursor = title.querySelector('.cursor');
+  let i = 0;
+
+  function type() {
+    if (i < text.length) {
+      cursor.insertAdjacentText('beforebegin', text[i]);
+      i++;
+      setTimeout(type, i === 1 ? 800 : 80);
+    } else {
+      setTimeout(() => { cursor.style.display = 'none'; }, 2000);
+    }
+  }
+  setTimeout(type, 1200);
+})();
+
+/* ========================================
+   INTERSECTION OBSERVER — fade-in-up
+======================================== */
+(function initObserver() {
+  const els = document.querySelectorAll('.fade-in-up');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  els.forEach(el => obs.observe(el));
+})();
+
+/* ========================================
+   PASSWORD GATE
+======================================== */
+(function initPasswordGate() {
+  const btns     = document.querySelectorAll('.pw-btn');
+  const feedback = document.getElementById('gate-feedback');
+  let locked     = false;
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (locked) return;
+      const code = btn.dataset.code;
+
+      if (code === CORRECT_PASSWORD) {
+        locked = true;
+        btn.classList.add('correct');
+        feedback.textContent = '🎉 Yeay! Kamu ingat! Yuk lihat kejutannya...';
+        feedback.style.color = 'var(--gold)';
+        feedback.classList.add('show');
+        launchConfetti(3000);
+
+        setTimeout(() => {
+          document.getElementById('balloon-burst').style.display = 'flex';
+          document.getElementById('balloon-burst').scrollIntoView({ behavior: 'smooth' });
+          startBalloonBurst();
+        }, 1800);
+      } else {
+        btn.classList.add('wrong');
+        feedback.textContent = 'Hmm, coba ingat lagi... 😊';
+        feedback.style.color = '#c05070';
+        feedback.classList.add('show');
+        setTimeout(() => btn.classList.remove('wrong'), 600);
+        setTimeout(() => feedback.classList.remove('show'), 2500);
+      }
+    });
+  });
+})();
+
+/* ========================================
+   BALLOON BURST — WARNA BIRU
+======================================== */
+function startBalloonBurst() {
+  const canvas  = document.getElementById('balloon-canvas');
+  const ctx     = canvas.getContext('2d');
+  const content = document.getElementById('burst-content');
+
+  function resize() {
+    canvas.width  = canvas.offsetWidth;
+    canvas.height = canvas.offsetHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  // Balon dengan palet biru-gold
+  const colors   = ['#2b8ccf','#5baee0','#aad8f5','#d4a017','#f0c842','#ffe680','#ffffff','#c8e9ff'];
+  const balloons = [];
+  const parts    = [];
+
+  for (let i = 0; i < 22; i++) {
+    balloons.push({
+      x:      Math.random() * canvas.width,
+      y:      canvas.height + 60 + Math.random() * 100,
+      vy:     -(Math.random() * 2 + 1.5),
+      vx:     (Math.random() - 0.5) * 1,
+      r:      Math.random() * 20 + 25,
+      color:  colors[Math.floor(Math.random() * colors.length)],
+      popped: false,
+      delay:  Math.random() * 60
+    });
+  }
+
+  let poppedCount = 0, done = false;
+
+  function emitBurst(x, y, color) {
+    for (let i = 0; i < 20; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 5 + 2;
+      parts.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        r: Math.random() * 4 + 1,
+        color,
+        alpha: 1,
+        life: 60
+      });
+    }
+  }
+
+  function loop() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    balloons.forEach(b => {
+      if (b.delay > 0) { b.delay--; return; }
+      if (b.popped) return;
+      b.y  += b.vy;
+      b.x  += b.vx;
+      b.vx += (Math.random() - 0.5) * 0.05;
+
+      if (b.y < canvas.height * 0.35 && !b.popped) {
+        b.popped = true;
+        poppedCount++;
+        emitBurst(b.x, b.y, b.color);
+        if (poppedCount >= balloons.length && !done) {
+          done = true;
+          setTimeout(() => content.classList.add('show'), 400);
+          setTimeout(() => launchConfetti(4000), 600);
+        }
+      }
+
+      ctx.save();
+      // Balon body
+      ctx.beginPath();
+      ctx.ellipse(b.x, b.y, b.r * 0.75, b.r, 0, 0, Math.PI * 2);
+      ctx.fillStyle = b.color;
+      ctx.fill();
+      // Shine
+      ctx.beginPath();
+      ctx.ellipse(b.x - b.r * 0.25, b.y - b.r * 0.3, b.r * 0.2, b.r * 0.25, -0.3, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.45)';
+      ctx.fill();
+      // String
+      ctx.beginPath();
+      ctx.moveTo(b.x, b.y + b.r);
+      ctx.bezierCurveTo(b.x + 5, b.y + b.r + 20, b.x - 5, b.y + b.r + 40, b.x, b.y + b.r + 60);
+      ctx.strokeStyle = 'rgba(200,238,255,0.5)';
+      ctx.lineWidth   = 1;
+      ctx.stroke();
+      ctx.restore();
+    });
+
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i];
+      p.x    += p.vx;
+      p.y    += p.vy;
+      p.vy   += 0.15;
+      p.alpha -= 1 / p.life;
+      p.life--;
+      ctx.save();
+      ctx.globalAlpha = Math.max(0, p.alpha);
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.fill();
+      ctx.restore();
+      if (p.life <= 0) parts.splice(i, 1);
+    }
+
+    if (!done || parts.length > 0) requestAnimationFrame(loop);
+  }
+  loop();
+}
+
+/* ========================================
+   MESSAGE — WORD BY WORD REVEAL
+======================================== */
+(function initMsgReveal() {
+  const msgBody = document.getElementById('msg-body');
+  const rawText = msgBody.textContent.trim();
+  msgBody.innerHTML = rawText.split(/\s+/).map(w =>
+    `<span class="msg-word">${w}&nbsp;</span>`
+  ).join('');
+  const words   = msgBody.querySelectorAll('.msg-word');
+  let revealed  = false;
+
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !revealed) {
+      revealed = true;
+      words.forEach((w, i) => { setTimeout(() => w.classList.add('visible'), i * 60); });
+      obs.unobserve(msgBody);
+    }
+  }, { threshold: 0.2 });
+  obs.observe(msgBody);
+})();
+
+/* ========================================
+   FLIP CARDS
+======================================== */
+document.querySelectorAll('.flip-card').forEach(card => {
+  card.addEventListener('click', () => card.classList.toggle('flipped'));
+});
+
+/* ========================================
+   FLOATING HEARTS/STARS BACKGROUND — BIRU
+======================================== */
+(function initHearts() {
+  const container = document.getElementById('hearts-bg');
+  const emojis    = ['💙', '⭐', '✨', '🌟', '💛', '💫', '🌸'];
+
+  for (let i = 0; i < 20; i++) {
+    const h       = document.createElement('div');
+    h.className   = 'floating-heart';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left  = Math.random() * 100 + '%';
+    h.style.fontSize = (Math.random() * 1.2 + 0.8) + 'rem';
+    const dur     = Math.random() * 10 + 8;
+    const delay   = Math.random() * 10;
+    h.style.animation = `floatHeart ${dur}s ${delay}s linear infinite`;
+    container.appendChild(h);
+  }
+})();
+
+/* ========================================
+   BIRTHDAY CAKE — 25 CANDLES — BIRU
+======================================== */
+(function initCake() {
+  const row = document.getElementById('candles-row');
+  const btn = document.getElementById('blow-btn');
+  const msg = document.getElementById('wish-message');
+  const AGE = 25;
+
+  const candleColors = [
+    '#d4a017','#f0c842','#ffe680','#a07010','#d4a017',
+    '#f0c842','#ffe680','#d4a017','#a07010','#f0c842',
+  ];
+
+  const candles = [];
+  for (let i = 0; i < AGE; i++) {
+    const wrap      = document.createElement('div');
+    wrap.className  = 'candle';
+    const flame     = document.createElement('div');
+    flame.className = 'flame';
+    const stick     = document.createElement('div');
+    stick.className = 'candle-stick';
+    stick.style.background = candleColors[i % candleColors.length];
+    wrap.appendChild(flame);
+    wrap.appendChild(stick);
+    row.appendChild(wrap);
+    candles.push(flame);
+  }
+
+  let blown = false, count = 0;
+
+  btn.addEventListener('click', () => {
+    if (blown) return;
+    blown        = true;
+    btn.disabled = true;
+    btn.textContent = 'Meniup... 🌬️';
+
+    candles.forEach((flame, i) => {
+      setTimeout(() => {
+        flame.classList.add('out');
+        count++;
+        if (count === AGE) {
+          setTimeout(() => {
+            msg.classList.add('show');
+            launchConfetti(5000);
+            btn.textContent = '🎉 Selamat Ulang Tahun!';
+          }, 600);
+        }
+      }, i * 120);
+    });
+  });
+})();
+
+/* ========================================
+   STAR FIELD — SECTION 8
+======================================== */
+(function initStarField() {
+  const sf = document.getElementById('star-field');
+
+  for (let i = 0; i < 100; i++) {
+    const s     = document.createElement('div');
+    s.className = 'star-dot';
+    const size  = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-duration:${Math.random()*3+2}s;
+      animation-delay:${Math.random()*3}s;
+    `;
+    sf.appendChild(s);
+  }
+
+  for (let i = 0; i < 6; i++) {
+    const ss      = document.createElement('div');
+    ss.className  = 'shooting-star';
+    ss.style.cssText = `
+      left:${Math.random()*60}%;
+      top:${Math.random()*40}%;
+      animation-duration:${Math.random()*4+3}s;
+      animation-delay:${Math.random()*6}s;
+    `;
+    sf.appendChild(ss);
+  }
+})();
+
+/* ========================================
+   CONFETTI ENGINE — BIRU + PUTIH
+======================================== */
+function launchConfetti(duration) {
+  const canvas  = document.getElementById('confetti-canvas');
+  const ctx     = canvas.getContext('2d');
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  // Palet confetti: biru + gold premium
+  const colors = ['#d4a017','#f0c842','#ffe680','#2b8ccf','#5baee0','#aad8f5','#ffffff','#a07010','#ffdd44'];
+  const pieces = [];
+
+  for (let i = 0; i < 160; i++) {
+    pieces.push({
+      x:     Math.random() * canvas.width,
+      y:     Math.random() * canvas.height - canvas.height,
+      w:     Math.random() * 10 + 5,
+      h:     Math.random() * 5 + 3,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      angle: Math.random() * Math.PI * 2,
+      va:    (Math.random() - 0.5) * 0.1,
+      vy:    Math.random() * 4 + 2,
+      vx:    (Math.random() - 0.5) * 2,
+    });
+  }
+
+  const end = Date.now() + duration;
+
+  function animate() {
+    if (Date.now() > end) { ctx.clearRect(0, 0, canvas.width, canvas.height); return; }
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    pieces.forEach(p => {
+      p.y     += p.vy;
+      p.x     += p.vx;
+      p.angle += p.va;
+
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.globalAlpha = Math.min(1, (end - Date.now()) / 800);
+      ctx.fillStyle   = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+
+      if (p.y > canvas.height) {
+        p.y = -10;
+        p.x = Math.random() * canvas.width;
+      }
+    });
+    requestAnimationFrame(animate);
+  }
+  animate();
+}
+
+/* ========================================
+   REPLAY
+======================================== */
+function replayFromStart() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+window.addEventListener('resize', () => {
+  const c = document.getElementById('confetti-canvas');
+  c.width  = window.innerWidth;
+  c.height = window.innerHeight;
+});
+</script>
+
+</body>
+</html>
