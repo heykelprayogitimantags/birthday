@@ -761,29 +761,33 @@
 
     .polaroid-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 32px;
-      max-width: 900px;
+      max-width: 960px;
       width: 100%;
+      margin: 0 auto;
+      justify-content: center;
     }
 
     .polaroid {
-      background: rgba(255,255,255,0.9);
-      padding: 12px 12px 40px;
-      box-shadow: 0 10px 32px rgba(43,140,207,0.2), 0 2px 8px rgba(212,160,23,0.15);
-      border: 1px solid rgba(212,160,23,0.2);
-      border-radius: 4px;
+      background: rgba(255,255,255,0.95);
+      padding: 14px 14px 44px;
+      box-shadow: 0 10px 32px rgba(43,140,207,0.18), 0 2px 10px rgba(212,160,23,0.18);
+      border: 1px solid rgba(212,160,23,0.28);
+      border-radius: 6px;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-      cursor: default;
+      cursor: pointer;
     }
 
     .polaroid:nth-child(odd)  { transform: rotate(-2.5deg); }
     .polaroid:nth-child(even) { transform: rotate(2deg); }
-    .polaroid:nth-child(3n)   { transform: rotate(-1deg); }
+    .polaroid:nth-child(3n)   { transform: rotate(-1.5deg); }
 
-    .polaroid:hover {
-      transform: rotate(0) scale(1.06) !important;
-      box-shadow: 0 20px 60px rgba(212,160,23,0.35), 0 8px 24px rgba(43,140,207,0.2);
+    .polaroid:hover,
+    .polaroid.active {
+      transform: rotate(0) scale(1.05) translateY(-8px) !important;
+      box-shadow: 0 20px 60px rgba(212,160,23,0.4), 0 8px 24px rgba(43,140,207,0.25);
+      border-color: var(--gold);
       z-index: 10;
     }
 
@@ -796,7 +800,7 @@
       justify-content: center;
       flex-direction: column;
       gap: 8px;
-      border-radius: 2px;
+      border-radius: 4px;
       overflow: hidden;
     }
 
@@ -808,7 +812,8 @@
       transition: transform 0.5s ease;
     }
 
-    .polaroid:hover .polaroid-img img {
+    .polaroid:hover .polaroid-img img,
+    .polaroid.active .polaroid-img img {
       transform: scale(1.06);
     }
 
@@ -822,10 +827,12 @@
     .polaroid-caption {
       text-align: center;
       font-family: 'Dancing Script', cursive;
-      font-size: 0.95rem;
-      color: var(--blue-soft);
-      margin-top: 10px;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #0b395b;
+      margin-top: 14px;
       line-height: 1.4;
+      text-shadow: 0 1px 1px rgba(255,255,255,0.8);
     }
 
     /* ========================================
@@ -1394,7 +1401,7 @@
       .big-alert-title { font-size: 1.55rem; }
       .big-alert-desc { font-size: 0.95rem; }
 
-      .polaroid-grid  { grid-template-columns: 1fr 1fr; }
+      .polaroid-grid  { grid-template-columns: 1fr; max-width: 290px; gap: 28px; margin: 0 auto; }
       .flip-grid      { grid-template-columns: 1fr 1fr; }
       .tier-top    { width: 220px; }
       .tier-middle { width: 260px; }
@@ -1560,62 +1567,34 @@
   <p class="memories-subtitle fade-in-up delay-1">Setiap momen bersamamu selalu terasa sempurna...</p>
 
   <div class="polaroid-grid">
-    <!--
-      CUSTOMIZE: Uncomment <img src="memory1.jpg"> dan ganti caption
-    -->
+    <!-- Foto Kenangan 1 -->
     <div class="polaroid fade-in-up delay-1">
       <div class="polaroid-img">
-        <!-- <img src="memory1.jpg" alt="Memory 1" /> -->
-        <span class="ph-icon-pol">📷</span>
-        <span class="ph-txt">Foto kenangan 1</span>
+        <img src="assets/kenangan1.png" alt="Kenangan 1" />
       </div>
       <p class="polaroid-caption">"Momen pertama kita..."</p>
     </div>
 
+    <!-- Foto Kenangan 2 -->
     <div class="polaroid fade-in-up delay-2">
       <div class="polaroid-img">
-        <!-- <img src="memory2.jpg" alt="Memory 2" /> -->
-        <span class="ph-icon-pol">📷</span>
-        <span class="ph-txt">Foto kenangan 2</span>
+        <img src="assets/kenangan2.jpeg" alt="Kenangan 2" />
       </div>
       <p class="polaroid-caption">"Waktu kita tertawa bersama"</p>
     </div>
 
+    <!-- Foto Kenangan 3 -->
     <div class="polaroid fade-in-up delay-3">
       <div class="polaroid-img">
-        <!-- <img src="memory3.jpg" alt="Memory 3" /> -->
-        <span class="ph-icon-pol">📷</span>
-        <span class="ph-txt">Foto kenangan 3</span>
+        <img src="assets/kenangan3.jpeg" alt="Kenangan 3" />
       </div>
       <p class="polaroid-caption">"Petualangan kita berdua"</p>
     </div>
 
-    <div class="polaroid fade-in-up delay-4">
-      <div class="polaroid-img">
-        <!-- <img src="memory4.jpg" alt="Memory 4" /> -->
-        <span class="ph-icon-pol">📷</span>
-        <span class="ph-txt">Foto kenangan 4</span>
-      </div>
-      <p class="polaroid-caption">"Senyummu yang selalu kuingat"</p>
-    </div>
-
-    <div class="polaroid fade-in-up delay-5">
-      <div class="polaroid-img">
-        <!-- <img src="memory5.jpg" alt="Memory 5" /> -->
-        <span class="ph-icon-pol">📷</span>
-        <span class="ph-txt">Foto kenangan 5</span>
-      </div>
-      <p class="polaroid-caption">"Momen yang tak terlupakan"</p>
-    </div>
-
-    <div class="polaroid fade-in-up delay-6">
-      <div class="polaroid-img">
-        <!-- <img src="memory6.jpg" alt="Memory 6" /> -->
-        <span class="ph-icon-pol">📷</span>
-        <span class="ph-txt">Foto kenangan 6</span>
-      </div>
-      <p class="polaroid-caption">"Bersamamu terasa sempurna"</p>
-    </div>
+    <!--
+      TIPS: Jika ingin menambahkan foto kenangan 4, 5, dst.,
+      cukup salin salah satu blok .polaroid di atas dan sesuaikan nama file fotonya!
+    -->
   </div>
 </section>
 
@@ -2215,10 +2194,14 @@ function startBalloonBurst() {
 })();
 
 /* ========================================
-   FLIP CARDS
+   FLIP CARDS & POLAROID INTERACTION
 ======================================== */
 document.querySelectorAll('.flip-card').forEach(card => {
   card.addEventListener('click', () => card.classList.toggle('flipped'));
+});
+
+document.querySelectorAll('.polaroid').forEach(p => {
+  p.addEventListener('click', () => p.classList.toggle('active'));
 });
 
 /* ========================================
