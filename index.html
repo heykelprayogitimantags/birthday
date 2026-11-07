@@ -648,7 +648,12 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: none;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+
+    .photo-frame:hover img {
+      transform: scale(1.08);
     }
 
     .photo-placeholder { text-align: center; padding: 16px; }
@@ -695,11 +700,22 @@
 
     .msg-body {
       font-family: 'Dancing Script', cursive;
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      line-height: 2.2;
-      color: var(--blue-soft);
+      font-size: clamp(1.2rem, 2.7vw, 1.65rem);
+      font-weight: 600;
+      line-height: 2.1;
+      color: #0b395b;
       text-align: center;
-      max-width: 720px;
+      max-width: 760px;
+      margin: 0 auto;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.7);
+    }
+
+    .msg-paragraph {
+      margin-bottom: 24px;
+      line-height: 2.1;
+    }
+    .msg-paragraph:last-child {
+      margin-bottom: 0;
     }
 
     .msg-body::before,
@@ -713,8 +729,16 @@
       box-shadow: 0 0 6px rgba(212,160,23,0.4);
     }
 
-    .msg-word { display: inline; opacity: 0; transition: opacity 0.3s ease; }
-    .msg-word.visible { opacity: 1; }
+    .msg-word {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    .msg-word.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ========================================
        SECTION 5 — OUR MEMORIES
@@ -776,7 +800,22 @@
       overflow: hidden;
     }
 
-    .polaroid-img img { width: 100%; height: 100%; object-fit: cover; display: none; }
+    .polaroid-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .polaroid:hover .polaroid-img img {
+      transform: scale(1.06);
+    }
+
+    .polaroid-img:has(img) .ph-icon-pol,
+    .polaroid-img:has(img) .ph-txt {
+      display: none;
+    }
     .polaroid-img .ph-icon-pol { font-size: 2rem; color: var(--blue); }
     .polaroid-img .ph-txt { font-size: 0.65rem; color: var(--blue-soft); text-align: center; padding: 0 8px; }
 
@@ -1323,15 +1362,12 @@
     <div class="sep fade-in-up delay-2"></div>
 
     <div class="msg-body fade-in-up delay-3" id="msg-body">
-      <!--
-        CUSTOMIZE: Ganti teks pesan di bawah dengan pesan aslimu.
-      -->
-      Happy birthday to u cintakuu!!  selamat bertambah usia selamat tiba di usia baruu, diumur yangg ke 25 ini adek berdoa semoga emas selalu dalam lindungan Allah swt.
-      panjangg umur, sehat selaluu, lancarr segalaa urusannyaa, sertaa selalu lancarr juga rezekinya. semoga hidup selalu menitipkan hal hal baikk disepanjang jalann emas, 
-      semoga setiap langkah yang mas tempuh membawa mas lebihh dekat keapa apa yang selama ini mass do'akan dan inginkan. 💙
-      happy birthday to u mass baksokuu, you make me proud, adek bangga sama emass, terima kasih sudah bertahan sejauh ini, terima kasih sudah mau melewati hari hari yang nyaris 
-      merenggut terangnya hidup mas, tapi tak pernah berhasil merenggut diri mass sendirii. hari demi hari mas tetap melangkah, walaupun langkah mas kerap dibayar dengan lelah and 
-      letih yang kadang tak pernah mas bicarakan. 💙
+      <p class="msg-paragraph">
+        Happy birthday to u cintakuu!! selamat bertambah usia selamat tiba di usia baruu, diumur yangg ke 25 ini adek berdoa semoga emas selalu dalam lindungan Allah swt. panjangg umur, sehat selaluu, lancarr segalaa urusannyaa, sertaa selalu lancarr juga rezekinya. semoga hidup selalu menitipkan hal hal baikk disepanjang jalann emas, semoga setiap langkah yang mas tempuh membawa mas lebihh dekat keapa apa yang selama ini mass do'akan dan inginkan. 💙
+      </p>
+      <p class="msg-paragraph">
+        happy birthday to u mass baksokuu, you make me proud, adek bangga sama emass, terima kasih sudah bertahan sejauh ini, terima kasih sudah mau melewati hari hari yang nyaris merenggut terangnya hidup mas, tapi tak pernah berhasil merenggut diri mass sendirii. hari demi hari mas tetap melangkah, walaupun langkah mas kerap dibayar dengan lelah and letih yang kadang tak pernah mas bicarakan. 💙
+      </p>
     </div>
   </div>
 </section>
@@ -1692,6 +1728,9 @@ function playTone(type) {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) return;
     const ctx = new AudioContext();
+    if (ctx.state === 'suspended') {
+      ctx.resume();
+    }
 
     if (type === 'wrong') {
       // 2 nada penolakan rendah (buzzer halus)
@@ -1842,8 +1881,8 @@ function startBalloonBurst() {
   const content = document.getElementById('burst-content');
 
   function resize() {
-    canvas.width  = canvas.offsetWidth;
-    canvas.height = canvas.offsetHeight;
+    canvas.width  = canvas.offsetWidth || window.innerWidth;
+    canvas.height = canvas.offsetHeight || window.innerHeight;
   }
   resize();
   window.addEventListener('resize', resize);
@@ -1949,25 +1988,45 @@ function startBalloonBurst() {
 }
 
 /* ========================================
-   MESSAGE — WORD BY WORD REVEAL
+   MESSAGE — WORD BY WORD REVEAL (PROFESIONAL)
 ======================================== */
 (function initMsgReveal() {
   const msgBody = document.getElementById('msg-body');
-  const rawText = msgBody.textContent.trim();
-  msgBody.innerHTML = rawText.split(/\s+/).map(w =>
-    `<span class="msg-word">${w}&nbsp;</span>`
-  ).join('');
-  const words   = msgBody.querySelectorAll('.msg-word');
-  let revealed  = false;
+  if (!msgBody) return;
+
+  const paragraphs = msgBody.querySelectorAll('p');
+  let allWordSpans = [];
+
+  if (paragraphs.length > 0) {
+    paragraphs.forEach(p => {
+      const words = p.textContent.trim().split(/\s+/);
+      p.innerHTML = words.map(w => `<span class="msg-word">${w}&nbsp;</span>`).join('');
+      p.querySelectorAll('.msg-word').forEach(span => allWordSpans.push(span));
+    });
+  } else {
+    const rawText = msgBody.textContent.trim();
+    msgBody.innerHTML = rawText.split(/\s+/).map(w => `<span class="msg-word">${w}&nbsp;</span>`).join('');
+    msgBody.querySelectorAll('.msg-word').forEach(span => allWordSpans.push(span));
+  }
+
+  let revealed = false;
+  function startReveal() {
+    if (revealed) return;
+    revealed = true;
+    allWordSpans.forEach((w, i) => {
+      setTimeout(() => w.classList.add('visible'), i * 36);
+    });
+  }
 
   const obs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting && !revealed) {
-      revealed = true;
-      words.forEach((w, i) => { setTimeout(() => w.classList.add('visible'), i * 60); });
+      startReveal();
       obs.unobserve(msgBody);
     }
-  }, { threshold: 0.2 });
+  }, { threshold: 0.15 });
+
   obs.observe(msgBody);
+  window.triggerMsgReveal = startReveal;
 })();
 
 /* ========================================
