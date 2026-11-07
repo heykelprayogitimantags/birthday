@@ -13,23 +13,23 @@
        ROOT VARIABLES — BIRU MUDA TERANG + PUTIH + GOLD PREMIUM
     ======================================== */
     :root {
-      --bg:           #b8e0f7;          /* Biru muda utama */
-      --bg2:          #d6eeff;          /* Biru muda lebih terang */
-      --bg3:          #e8f6ff;          /* Biru sangat muda */
-      --primary:      #5baee0;          /* Biru medium */
-      --blue:         #2b8ccf;          /* Biru utama */
-      --blue-light:   #5baee0;          /* Biru muda aksen */
-      --blue-soft:    #1a6fa8;          /* Biru tua untuk teks */
+      --bg:           #b8e0f7;         /* Biru muda utama */
+      --bg2:          #d6eeff;         /* Biru muda lebih terang */
+      --bg3:          #e8f6ff;         /* Biru sangat muda */
+      --primary:      #5baee0;         /* Biru medium */
+      --blue:         #2b8ccf;         /* Biru utama */
+      --blue-light:   #5baee0;         /* Biru muda aksen */
+      --blue-soft:    #1a6fa8;         /* Biru tua untuk teks */
       --white:        #ffffff;
-      --soft-white:   #f7fcff;          /* Putih kebiruan */
-      --ice:          #dff4ff;          /* Ice blue */
+      --soft-white:   #f7fcff;         /* Putih kebiruan */
+      --ice:          #dff4ff;         /* Ice blue */
       /* Gold premium */
-      --gold:         #d4a017;          /* Gold utama */
-      --gold-light:   #f0c842;          /* Gold terang */
-      --gold-shine:   #ffe680;          /* Gold bersinar */
-      --gold-dark:    #a07010;          /* Gold gelap */
+      --gold:         #d4a017;         /* Gold utama */
+      --gold-light:   #f0c842;         /* Gold terang */
+      --gold-shine:   #ffe680;         /* Gold bersinar */
+      --gold-dark:    #a07010;         /* Gold gelap */
       --text:         #ffffff;
-      --text-dark:    #0d3a5c;          /* Teks gelap untuk bg terang */
+      --text-dark:    #0d3a5c;         /* Teks gelap untuk bg terang */
       --muted:        #5b8daa;
       --glass-bg:     rgba(255,255,255,0.35);
       --glass-border: rgba(212,160,23,0.4);
@@ -1403,48 +1403,39 @@
     }
 
     /* ========================================
-       FLOATING ROMANTIC MUSIC PLAYER
+       MINI FLOATING MUSIC PLAYER
     ======================================== */
     .music-player-widget {
       position: fixed;
       bottom: 24px;
       right: 24px;
       z-index: 9998;
+      width: 55px;
+      height: 55px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
       display: flex;
       align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.82);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1.5px solid var(--gold);
-      border-radius: 9999px;
-      padding: 8px 18px 8px 8px;
-      box-shadow: 0 8px 25px rgba(10, 45, 80, 0.15), 0 0 20px rgba(212, 160, 23, 0.25);
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(10, 45, 80, 0.2);
       cursor: pointer;
-      user-select: none;
-      transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+      transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
     .music-player-widget:hover {
-      transform: translateY(-3px) scale(1.03);
-      box-shadow: 0 12px 30px rgba(10, 45, 80, 0.2), 0 0 30px rgba(212, 160, 23, 0.5);
-      background: rgba(255, 255, 255, 0.95);
-    }
-
-    .music-disc-wrap {
-      width: 42px;
-      height: 42px;
-      flex-shrink: 0;
-      perspective: 400px;
+      transform: scale(1.1);
+      box-shadow: 0 8px 25px rgba(212, 160, 23, 0.4);
     }
 
     .music-disc {
-      width: 100%;
-      height: 100%;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: radial-gradient(circle, #2d1822 0%, #150b10 65%, #050204 100%);
       border: 2px solid var(--gold);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1452,11 +1443,7 @@
     }
 
     .music-player-widget.playing .music-disc {
-      animation: spinVinyl 4s linear infinite;
-    }
-
-    .music-player-widget:not(.playing) .music-disc {
-      animation-play-state: paused;
+      animation: spinVinyl 3s linear infinite;
     }
 
     @keyframes spinVinyl {
@@ -1466,94 +1453,25 @@
 
     .disc-groove {
       position: absolute;
-      inset: 5px;
+      inset: 4px;
       border-radius: 50%;
-      border: 1px dashed rgba(255,255,255,0.18);
+      border: 1px dashed rgba(255,255,255,0.25);
     }
 
     .disc-center {
-      width: 17px;
-      height: 17px;
-      border-radius: 50%;
+      width: 16px;
+      height: 16px;
       background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
-      border: 2px solid #ffffff;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 8px;
       z-index: 2;
+      border: 1.5px solid #fff;
     }
 
-    .music-info {
-      display: flex;
-      flex-direction: column;
-      text-align: left;
-    }
-
-    .music-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #0b395b;
-      letter-spacing: 0.5px;
-      white-space: nowrap;
-    }
-
-    .music-sub {
-      font-family: 'Lato', sans-serif;
-      font-size: 0.68rem;
-      color: var(--muted);
-      letter-spacing: 0.5px;
-    }
-
-    .music-eq {
-      display: flex;
-      align-items: flex-end;
-      gap: 3px;
-      height: 16px;
-      margin-left: 2px;
-    }
-
-    .eq-bar {
-      width: 3px;
-      height: 4px;
-      background: linear-gradient(to top, var(--gold), var(--gold-light));
-      border-radius: 2px;
-      transition: height 0.2s ease;
-    }
-
-    .music-player-widget.playing .eq-bar:nth-child(1) {
-      animation: eqBounce 0.8s ease-in-out infinite alternate;
-    }
-    .music-player-widget.playing .eq-bar:nth-child(2) {
-      animation: eqBounce 1.1s ease-in-out infinite 0.2s alternate;
-    }
-    .music-player-widget.playing .eq-bar:nth-child(3) {
-      animation: eqBounce 0.7s ease-in-out infinite 0.4s alternate;
-    }
-    .music-player-widget.playing .eq-bar:nth-child(4) {
-      animation: eqBounce 1.0s ease-in-out infinite 0.1s alternate;
-    }
-
-    @keyframes eqBounce {
-      0%   { height: 4px; }
-      100% { height: 16px; }
-    }
-
-    /* ========================================
-       RESPONSIVE
-    ======================================== */
     @media (max-width: 600px) {
-      .music-player-widget {
-        bottom: 18px;
-        right: 18px;
-        padding: 6px 14px 6px 6px;
-        gap: 8px;
-      }
-      .music-disc-wrap { width: 34px; height: 34px; }
-      .music-title { font-size: 0.75rem; }
-      .music-sub { font-size: 0.62rem; }
-
       .pw-card-box { padding: 34px 16px 26px; border-radius: 24px; }
       .heart-padlock svg { width: 40px; height: 40px; }
       .lock-top-left { left: 12px; top: 14px; }
@@ -1583,6 +1501,15 @@
       .tier-bottom { width: 300px; }
       .candles-row { max-width: 300px; }
       .photo-frame { width: 160px; height: 160px; }
+      
+      .music-player-widget {
+        bottom: 20px;
+        right: 20px;
+        width: 48px;
+        height: 48px;
+      }
+      .music-disc { width: 38px; height: 38px; }
+      .disc-center { width: 14px; height: 14px; font-size: 7px; }
     }
   </style>
 </head>
@@ -1592,36 +1519,18 @@
 <canvas id="confetti-canvas"></canvas>
 
 <!-- ============================================================
-     FLOATING ROMANTIC MUSIC PLAYER
+     MINI FLOATING MUSIC PLAYER
 ============================================================ -->
-<div id="music-player-widget" class="music-player-widget" title="Putar / Jeda Musik">
-  <div class="music-disc-wrap">
-    <div class="music-disc" id="music-disc">
-      <div class="disc-groove"></div>
-      <div class="disc-center">💙</div>
-    </div>
-  </div>
-  <div class="music-info">
-    <span class="music-title" id="music-title-text">Romantic Melody 🎵</span>
-    <span class="music-sub" id="music-status-text">Putar Lagu</span>
-  </div>
-  <div class="music-eq" id="music-eq">
-    <span class="eq-bar"></span>
-    <span class="eq-bar"></span>
-    <span class="eq-bar"></span>
-    <span class="eq-bar"></span>
+<div id="music-player-widget" class="music-player-widget" title="Putar Musik">
+  <div class="music-disc">
+    <div class="disc-groove"></div>
+    <div class="disc-center">🎵</div>
   </div>
 </div>
 
-<!--
-  PILIHAN LAGU:
-  1. Jika ingin pakai file lagu sendiri: simpan file MP3 kamu di folder "assets/lagu.mp3"
-  2. Atau ganti link pada <source src="..."> dengan URL lagu pilihanmu
--->
-<audio id="bg-music" loop preload="auto">
-  <source src="assets/lagu.mp3" type="audio/mp3">
-  <source src="https://upload.wikimedia.org/wikipedia/commons/1/18/Nocturne_in_E_flat_major%2C_Op._9_no._2.mp3" type="audio/mp3">
-</audio>
+<!-- YouTube Player disembunyikan (Bukan display:none agar suara tetap keluar) -->
+<div id="youtube-player" style="position: absolute; width: 1px; height: 1px; left: -9999px; overflow: hidden; pointer-events: none;"></div>
+
 
 <!-- ============================================================
      SECTION 1 — HERO
@@ -1765,11 +1674,6 @@
       </div>
       <p class="polaroid-caption">"Petualangan kita berdua"</p>
     </div>
-
-    <!--
-      TIPS: Jika ingin menambahkan foto kenangan 4, 5, dst.,
-      cukup salin salah satu blok .polaroid di atas dan sesuaikan nama file fotonya!
-    -->
   </div>
 </section>
 
@@ -1781,8 +1685,6 @@
   <p class="ldr-sub fade-in-up delay-1">Terpisah Jarak &amp; Lautan, Namun Selalu Satu di Hati</p>
 
   <div class="ldr-map-board fade-in-up delay-2">
-    <!-- Tombol Next di bagian atas peta persis di referensi -->
-    
     <!-- Peta Interaktif dengan Pin Palembang (Cewek) & Bangka (Cowo) -->
     <div class="map-canvas-wrap">
       <svg class="map-svg-canvas" viewBox="0 0 840 400" xmlns="http://www.w3.org/2000/svg">
@@ -1893,9 +1795,6 @@
   <p class="reasons-subtitle fade-in-up delay-1" style="position:relative;z-index:2;">Klik kartu untuk membaca alasannya ✨</p>
 
   <div class="flip-grid" style="position:relative;z-index:2;">
-    <!--
-      CUSTOMIZE: Ganti teks "Karena..." di setiap flip-back
-    -->
     <div class="flip-card fade-in-up delay-1">
       <div class="flip-inner">
         <div class="flip-front"><span class="flip-num">01</span><span class="flip-icon">💙</span><span class="flip-hint">tap to read</span></div>
@@ -1969,11 +1868,10 @@
 </section>
 
 <!-- ============================================================
-     SECTION 7 — MAKE A WISH
+     SECTION 8 — MAKE A WISH
 ============================================================ -->
 <section id="make-wish" class="section">
   <h2 class="section-title fade-in-up">Make a Wish 🕯️</h2>
-  <!-- CUSTOMIZE: Subtitle -->
   <p class="wish-subtitle fade-in-up delay-1">"Tutup mata, buat permohonan, lalu tiup lilinnya..."</p>
 
   <div class="cake-container fade-in-up delay-2">
@@ -1982,12 +1880,10 @@
     <div class="cake-body">
       <div class="cake-tier tier-top">
         <div class="tier-deco"></div>
-        <!-- CUSTOMIZE: Teks tier atas kue -->
         <span class="tier-text" style="color:rgba(3,29,58,0.85);font-size:1rem;">Happy Birthday</span>
       </div>
       <div class="cake-tier tier-middle">
         <div class="tier-deco"></div>
-        <!-- CUSTOMIZE: Teks tier tengah -->
         <span class="tier-text" style="color:#fff;">Sayang 💙</span>
       </div>
       <div class="cake-tier tier-bottom">
@@ -1998,7 +1894,6 @@
 
     <button class="blow-btn" id="blow-btn">Tiup Lilinnya 🌬️</button>
 
-    <!-- CUSTOMIZE: Pesan setelah lilin padam -->
     <p class="wish-message" id="wish-message">
       Semoga semua keinginanmu terkabul, Sayang...<br>
       Langit pun ikut merayakan hari spesialmu ✨💙
@@ -2007,12 +1902,11 @@
 </section>
 
 <!-- ============================================================
-     SECTION 8 — FINAL / OUTRO
+     SECTION 9 — FINAL / OUTRO
 ============================================================ -->
 <section id="final" class="section">
   <div class="star-field" id="star-field"></div>
 
-  <!-- CUSTOMIZE: Quote penutup -->
   <p class="final-quote fade-in-up">
     Kamu adalah alasan terbaik aku tersenyum setiap hari, dan aku tidak bisa membayangkan menjalani hari tanpa kamu di dalamnya.
   </p>
@@ -2077,14 +1971,13 @@ const CORRECT_PASSWORD = '240326';
     H = canvas.height = window.innerHeight;
   }
 
-  // Biru muda & gold untuk partikel
   const pColors = [
-    'rgba(43,140,207,',   // biru
-    'rgba(91,174,224,',   // biru muda
-    'rgba(212,160,23,',   // gold
-    'rgba(240,200,66,',   // gold terang
-    'rgba(255,230,128,',  // gold shine
-    'rgba(255,255,255,',  // putih
+    'rgba(43,140,207,',   
+    'rgba(91,174,224,',   
+    'rgba(212,160,23,',   
+    'rgba(240,200,66,',   
+    'rgba(255,230,128,',  
+    'rgba(255,255,255,',  
   ];
 
   function createParticle() {
@@ -2141,7 +2034,6 @@ const CORRECT_PASSWORD = '240326';
    HERO TYPEWRITER
 ======================================== */
 (function heroTypewriter() {
-  // CUSTOMIZE: Teks hero
   const text   = 'Happy Birthday, Sayang! 🎂';
   const title  = document.getElementById('hero-title');
   const cursor = title.querySelector('.cursor');
@@ -2172,7 +2064,6 @@ function playTone(type) {
     }
 
     if (type === 'wrong') {
-      // 2 nada penolakan rendah (buzzer halus)
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sawtooth';
@@ -2185,7 +2076,6 @@ function playTone(type) {
       osc.start();
       osc.stop(ctx.currentTime + 0.35);
     } else if (type === 'correct') {
-      // Melodi arpeggio kemenangan ceria (C5 - E5 - G5 - C6)
       const notes = [523.25, 659.25, 783.99, 1046.50];
       notes.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
@@ -2202,9 +2092,7 @@ function playTone(type) {
         osc.stop(start + 0.5);
       });
     }
-  } catch (err) {
-    // Abaikan jika browser membatasi autoplay suara
-  }
+  } catch (err) {}
 }
 
 /* ========================================
@@ -2216,7 +2104,7 @@ function showBigAlert() {
   if (modal) {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden'; // Kunci scroll saat alert muncul
+    document.body.style.overflow = 'hidden'; 
   }
 }
 
@@ -2225,7 +2113,7 @@ function closeBigAlert() {
   if (modal) {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = ''; // Pulihkan scroll
+    document.body.style.overflow = ''; 
   }
 }
 
@@ -2251,7 +2139,7 @@ let globalObserver = null;
 })();
 
 /* ========================================
-   PASSWORD GATE (DENGAN LOCK SYSTEM & ALERT BESAR)
+   PASSWORD GATE (DENGAN LOCK SYSTEM)
 ======================================== */
 (function initPasswordGate() {
   const btns     = document.querySelectorAll('.pw-btn');
@@ -2273,12 +2161,11 @@ let globalObserver = null;
         feedback.classList.add('show');
         launchConfetti(3500);
 
-        // Putar musik otomatis jika belum berjalan
+        // Putar musik saat password berhasil ditebak
         if (window.playBackgroundMusic) {
           window.playBackgroundMusic();
         }
 
-        // BUKA KUNCI SELURUH HALAMAN SELANJUTNYA
         const lockedWrapper = document.getElementById('locked-content');
         if (lockedWrapper) {
           lockedWrapper.classList.remove('locked-content-hidden');
@@ -2290,7 +2177,6 @@ let globalObserver = null;
           balloonSection.style.display = 'flex';
         }
 
-        // Daftarkan kembali elemen fade-in di bagian yang baru dibuka
         if (globalObserver) {
           document.querySelectorAll('#locked-content .fade-in-up').forEach(el => {
             globalObserver.observe(el);
@@ -2304,12 +2190,8 @@ let globalObserver = null;
           }
         }, 1600);
       } else {
-        // JIKA KATA KUNCI SALAH:
-        // 1. Tombol bergetar merah
         btn.classList.add('wrong');
         setTimeout(() => btn.classList.remove('wrong'), 700);
-
-        // 2. Munculkan ALERT BESAR dan pastikan halaman selanjutnya tetap tidak bisa diakses
         showBigAlert();
       }
     });
@@ -2317,7 +2199,7 @@ let globalObserver = null;
 })();
 
 /* ========================================
-   BALLOON BURST — WARNA BIRU
+   BALLOON BURST
 ======================================== */
 function startBalloonBurst() {
   const canvas  = document.getElementById('balloon-canvas');
@@ -2331,7 +2213,6 @@ function startBalloonBurst() {
   resize();
   window.addEventListener('resize', resize);
 
-  // Balon dengan palet biru-gold
   const colors   = ['#2b8ccf','#5baee0','#aad8f5','#d4a017','#f0c842','#ffe680','#ffffff','#c8e9ff'];
   const balloons = [];
   const parts    = [];
@@ -2389,17 +2270,14 @@ function startBalloonBurst() {
       }
 
       ctx.save();
-      // Balon body
       ctx.beginPath();
       ctx.ellipse(b.x, b.y, b.r * 0.75, b.r, 0, 0, Math.PI * 2);
       ctx.fillStyle = b.color;
       ctx.fill();
-      // Shine
       ctx.beginPath();
       ctx.ellipse(b.x - b.r * 0.25, b.y - b.r * 0.3, b.r * 0.2, b.r * 0.25, -0.3, 0, Math.PI * 2);
       ctx.fillStyle = 'rgba(255,255,255,0.45)';
       ctx.fill();
-      // String
       ctx.beginPath();
       ctx.moveTo(b.x, b.y + b.r);
       ctx.bezierCurveTo(b.x + 5, b.y + b.r + 20, b.x - 5, b.y + b.r + 40, b.x, b.y + b.r + 60);
@@ -2432,7 +2310,7 @@ function startBalloonBurst() {
 }
 
 /* ========================================
-   MESSAGE — WORD BY WORD REVEAL (PROFESIONAL)
+   MESSAGE — WORD BY WORD REVEAL
 ======================================== */
 (function initMsgReveal() {
   const msgBody = document.getElementById('msg-body');
@@ -2485,7 +2363,7 @@ document.querySelectorAll('.polaroid').forEach(p => {
 });
 
 /* ========================================
-   FLOATING HEARTS/STARS BACKGROUND — BIRU
+   FLOATING HEARTS/STARS BACKGROUND
 ======================================== */
 (function initHearts() {
   const container = document.getElementById('hearts-bg');
@@ -2505,7 +2383,7 @@ document.querySelectorAll('.polaroid').forEach(p => {
 })();
 
 /* ========================================
-   BIRTHDAY CAKE — 25 CANDLES — BIRU
+   BIRTHDAY CAKE — 25 CANDLES
 ======================================== */
 (function initCake() {
   const row = document.getElementById('candles-row');
@@ -2591,7 +2469,7 @@ document.querySelectorAll('.polaroid').forEach(p => {
 })();
 
 /* ========================================
-   CONFETTI ENGINE — BIRU + PUTIH
+   CONFETTI ENGINE
 ======================================== */
 function launchConfetti(duration) {
   const canvas  = document.getElementById('confetti-canvas');
@@ -2599,7 +2477,6 @@ function launchConfetti(duration) {
   canvas.width  = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  // Palet confetti: biru + gold premium
   const colors = ['#d4a017','#f0c842','#ffe680','#2b8ccf','#5baee0','#aad8f5','#ffffff','#a07010','#ffdd44'];
   const pieces = [];
 
@@ -2647,31 +2524,6 @@ function launchConfetti(duration) {
 }
 
 /* ========================================
-   LDR MAP HEART BUTTON INTERACTION
-======================================== */
-(function initMapHeart() {
-  const btn = document.getElementById('map-heart-btn');
-  const countEl = document.getElementById('heart-count');
-  if (!btn || !countEl) return;
-
-  let count = 136.6;
-  let clicked = false;
-
-  btn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (!clicked) {
-      clicked = true;
-      count += 0.1;
-      countEl.textContent = count.toFixed(1).replace('.', ',') + ' rb';
-      btn.style.transform = 'scale(1.25)';
-      setTimeout(() => btn.style.transform = '', 300);
-      playTone('correct');
-      launchConfetti(2500);
-    }
-  });
-})();
-
-/* ========================================
    REPLAY
 ======================================== */
 function replayFromStart() {
@@ -2679,70 +2531,82 @@ function replayFromStart() {
 }
 
 /* ========================================
-   ROMANTIC BACKGROUND MUSIC CONTROLLER
+   YOUTUBE BACKGROUND MUSIC CONTROLLER
 ======================================== */
-(function initMusicPlayer() {
-  const audio  = document.getElementById('bg-music');
-  const widget = document.getElementById('music-player-widget');
-  const status = document.getElementById('music-status-text');
-  if (!audio || !widget) return;
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-  audio.volume = 0.55;
-  let isPlaying = false;
+var ytPlayer;
+var isMusicPlaying = false;
 
-  function updateUI(playing) {
-    isPlaying = playing;
-    if (playing) {
-      widget.classList.add('playing');
-      if (status) status.textContent = 'Sedang Memutar ✨';
-    } else {
-      widget.classList.remove('playing');
-      if (status) status.textContent = 'Klik untuk Putar 🎵';
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('youtube-player', {
+    height: '1',
+    width: '1',
+    videoId: '3aSl-8fIIU0', 
+    playerVars: {
+      'autoplay': 0, 
+      'controls': 0,
+      'loop': 1,
+      'playlist': '3aSl-8fIIU0' 
+    },
+    events: {
+      'onReady': onPlayerReady,
+      'onStateChange': onPlayerStateChange
     }
-  }
+  });
+}
 
-  function playMusic() {
-    audio.play().then(() => {
-      updateUI(true);
-    }).catch(() => {
-      updateUI(false);
-    });
-  }
-
-  function pauseMusic() {
-    audio.pause();
-    updateUI(false);
-  }
-
-  widget.addEventListener('click', (e) => {
+function onPlayerReady(event) {
+  const widget = document.getElementById('music-player-widget');
+  
+  widget.addEventListener('click', function(e) {
     e.stopPropagation();
-    if (isPlaying) {
-      pauseMusic();
+    if (isMusicPlaying) {
+      ytPlayer.pauseVideo();
     } else {
-      playMusic();
+      ytPlayer.playVideo();
     }
   });
 
-  // Autoplay saat sentuhan/klik pertama pengguna di halaman
+  // Autoplay saat interaksi pertama
   function handleFirstInteraction() {
-    if (!isPlaying) {
-      playMusic();
+    if (!isMusicPlaying && ytPlayer && ytPlayer.playVideo) {
+      ytPlayer.playVideo();
     }
     document.removeEventListener('click', handleFirstInteraction);
     document.removeEventListener('touchstart', handleFirstInteraction);
   }
-
   document.addEventListener('click', handleFirstInteraction, { once: true });
   document.addEventListener('touchstart', handleFirstInteraction, { once: true });
 
-  window.playBackgroundMusic  = playMusic;
-  window.pauseBackgroundMusic = pauseMusic;
-})();
+  window.playBackgroundMusic = function() {
+    if (ytPlayer && ytPlayer.playVideo) ytPlayer.playVideo();
+  };
+  window.pauseBackgroundMusic = function() {
+    if (ytPlayer && ytPlayer.pauseVideo) ytPlayer.pauseVideo();
+  };
+}
+
+function onPlayerStateChange(event) {
+  const widget = document.getElementById('music-player-widget');
+  if (event.data == YT.PlayerState.PLAYING) {
+    isMusicPlaying = true;
+    widget.classList.add('playing');
+  } else {
+    isMusicPlaying = false;
+    widget.classList.remove('playing');
+  }
+}
 
 window.addEventListener('resize', () => {
   const c = document.getElementById('confetti-canvas');
-  c.width  = window.innerWidth;
-  c.height = window.innerHeight;
+  if(c){
+    c.width  = window.innerWidth;
+    c.height = window.innerHeight;
+  }
 });
 </script>
 
